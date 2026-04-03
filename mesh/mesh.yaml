@@ -160,20 +160,6 @@ sources:
         produces:
           - com.streamx.blueprints.web-resource.published.v1
           - com.streamx.blueprints.web-resource.unpublished.v1
-  eds:
-    outgoing:
-      - ref: inbox.pages
-        produces:
-          - com.streamx.blueprints.page.published.v1
-          - com.streamx.blueprints.page.unpublished.v1
-      - ref: inbox.web-resources
-        produces:
-          - com.streamx.blueprints.web-resource.published.v1
-          - com.streamx.blueprints.web-resource.unpublished.v1
-      - ref: inbox.assets
-        produces:
-          - com.streamx.blueprints.asset.published.v1
-          - com.streamx.blueprints.asset.unpublished.v1
 
 ingestion:
   rest-ingestion:
