@@ -185,6 +185,16 @@ ingestion:
           STREAMX_SOURCES_EDS_ACCEPT_IAT_FROM: "1704067200"
 
 processing:
+  pages-relay:
+    descriptor: relay
+    containers:
+      service:
+        incoming:
+          events:
+            ref: relay.pages
+        outgoing:
+          relayed-events:
+            ref: outbox.pages
 
   assets-relay:
     descriptor: relay
@@ -218,7 +228,7 @@ processing:
             ref: inbox.pages
         outgoing:
           outgoing-resources:
-            ref: outbox.pages
+            ref: relay.pages
           download-requests:
             ref: relay.download-requests
         environmentFrom:
@@ -263,7 +273,7 @@ processing:
       processor:
         incoming:
           pages:
-            ref: outbox.pages
+            ref: relay.pages
           fragments:
             ref: relay.fragments
         outgoing:
