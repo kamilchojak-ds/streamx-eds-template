@@ -17,13 +17,13 @@ The system architecture works as follows:
 1. **Edge Delivery Services (EDS)** acts as the primary content source.
 2. When content is published from EDS:
 
-   * Pages and assets are ingested into **StreamX**
-   * The content becomes available through **StreamX delivery services**
+    * Pages and assets are ingested into **StreamX**
+    * The content becomes available through **StreamX delivery services**
 3. **OpenSearch** indexes all ingested pages.
 4. Content is delivered through:
 
-   * **Edge Delivery CDN**
-   * **StreamX**
+    * **Edge Delivery CDN**
+    * **StreamX**
 
 ```
 EDS (Content Source)
@@ -50,6 +50,60 @@ Before starting the setup ensure you have:
 ---
 
 # EDS Repository Configuration
+
+⚠️ **Using Your Own EDS Repository**
+
+This template is preconfigured to work with a **demo Edge Delivery Services (EDS) source**.
+
+If you want to connect your own EDS project, additional configuration is required beyond the steps below.
+
+## Step 0 — Prepare your repository
+
+Before configuring ingestion, you should:
+
+1. **Fork this repository**
+2. Update EDS-related domain configuration in the following files:
+
+```
+external-references-rewriter.pages.properties
+external-references-rewriter.web-resources.properties
+```
+
+3. In both files, update:
+
+```
+streamx.blueprints.external-references-rewriter.base-url-for-relative-paths=<YOUR_EDS_DOMAIN>
+```
+
+Replace `<YOUR_EDS_DOMAIN>` with your actual **Edge Delivery Services domain**.
+
+### Why this matters
+
+These properties control how **relative URLs (links, assets, scripts)** are rewritten.
+
+If you skip this step:
+
+* Your app will still point to the **demo EDS**
+* Assets and links may break or resolve incorrectly
+
+---
+
+## Step 1 — Connect your repository in StreamX
+
+After preparing your fork:
+
+1. Go to **StreamX Console**
+2. Open your project **Settings**
+3. Update the repository URL to point to **your fork**
+
+This ensures that:
+
+* Your configuration changes are used
+* Your EDS source is properly integrated
+
+---
+
+## Step 2 — Configure ingestion
 
 Your **Edge Delivery Services repository** must be configured to allow synchronization of frontend resources with StreamX.
 
@@ -112,9 +166,9 @@ STREAMX_INGESTION_URL=<REST_INGESTION_URL>
 
 # GitHub Workflows
 
-This template provides **two GitHub workflows** responsible for synchronizing resources and content between EDS and StreamX.
+This template provides **GitHub workflows** responsible for synchronizing resources and content between EDS and StreamX.
 
-Both workflows can be found in:
+All workflows can be found in:
 
 ```
 github-action/
@@ -140,7 +194,7 @@ It is typically used:
 ### Workflow Name
 
 ```
-StreamX Full Code Sync
+Sync web resources with StreamX
 ```
 
 ### How to Run
@@ -149,7 +203,7 @@ StreamX Full Code Sync
 2. Select:
 
 ```
-StreamX Full Code Sync
+Sync web resources with StreamX
 ```
 
 3. Click **Run workflow**
@@ -163,7 +217,7 @@ STREAMX_INGESTION_INCLUDES
 
 ---
 
-# Workflow 2 — EDS Publish Sync
+# Workflow 2 — Publish to StreamX
 
 This workflow handles **content published through Edge Delivery Services**.
 
@@ -176,7 +230,7 @@ Whenever new content is published in EDS:
 ### Workflow Name
 
 ```
-StreamX EDS Publish Sync
+Publish to StreamX
 ```
 
 ### Trigger
@@ -239,7 +293,6 @@ After completing the setup:
 * All pages are **indexed in OpenSearch**
 * Content can be delivered through:
 
-   * **Edge Delivery CDN**
-   * **StreamX Delivery Services**
+    * **Edge Delivery CDN**
+    * **StreamX Delivery Services**
 
----
