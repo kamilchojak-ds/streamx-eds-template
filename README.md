@@ -108,6 +108,11 @@ This ensures that:
 Your **Edge Delivery Services repository** must be configured to allow synchronization of frontend resources with StreamX.
 
 Add the following **environment variables** to the repository configuration.
+---
+
+## EDS_DOMAIN_URL
+
+You EDS project live url. Used for fetching related resources
 
 ---
 
