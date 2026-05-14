@@ -49,15 +49,15 @@ Before starting the setup ensure you have:
 
 ---
 
-# EDS Repository Configuration
+# EDS Template Configuration
 
 ⚠️ **Using Your Own EDS Repository**
 
 This template is preconfigured to work with a **demo Edge Delivery Services (EDS) source**.
 
-If you want to connect your own EDS project, additional configuration is required beyond the steps below.
+If you want to connect your own EDS project, additional configuration is required.
 
-## Step 0 — Prepare your repository
+## Step 1 — Prepare your repository
 
 Before configuring ingestion, you should:
 
@@ -88,7 +88,7 @@ If you skip this step:
 
 ---
 
-## Step 1 — Connect your repository in StreamX
+## Step 2 — Connect your repository in StreamX
 
 After preparing your fork:
 
@@ -103,20 +103,22 @@ This ensures that:
 
 ---
 
-## Step 2 — Configure ingestion
+# EDS Project Configuration
+
+## Configure ingestion
 
 Your **Edge Delivery Services repository** must be configured to allow synchronization of frontend resources with StreamX.
 
-Add the following **environment variables** to the repository configuration.
+Add the following **environment variables** to the repository configuration [Github -> Settings -> Secrets and variables -> Actions -> Secrets/Variables].
 ---
 
-## EDS_DOMAIN_URL
+## EDS_DOMAIN_URL (Variables)
 
 You EDS project live url. Used for fetching related resources
 
 ---
 
-## STREAMX_INGESTION_INCLUDES
+## STREAMX_INGESTION_INCLUDES (Variables)
 
 Defines the list of file patterns that should be synchronized with StreamX.
 
@@ -141,7 +143,17 @@ These paths define which **frontend resources** will be ingested into StreamX.
 
 ---
 
-## STREAMX_INGESTION_GH_TOKEN
+## STREAMX_INGESTION_URL (Variables)
+
+Use the ingestion URL obtained from the **Rest Ingestion Gateway** in the StreamX Console.
+
+```
+STREAMX_INGESTION_URL=<REST_INGESTION_URL>
+```
+
+---
+
+## STREAMX_INGESTION_GH_TOKEN (Secrets)
 
 Token used by the GitHub workflows to authenticate with StreamX.
 
@@ -155,16 +167,6 @@ Then configure it in your repository:
 
 ```
 STREAMX_INGESTION_GH_TOKEN=<TOKEN>
-```
-
----
-
-## STREAMX_INGESTION_URL
-
-Use the ingestion URL obtained from the **Rest Ingestion Gateway** in the StreamX Console.
-
-```
-STREAMX_INGESTION_URL=<REST_INGESTION_URL>
 ```
 
 ---
@@ -212,7 +214,7 @@ Sync web resources with StreamX
 ```
 
 3. Click **Run workflow**
-4. Choose the branch you want to synchronize.
+4. Choose the branch you want to synchronize (e.g., main).
 
 The workflow will ingest all resources defined in:
 
