@@ -227,7 +227,7 @@ processing:
           configs:
           - "external-references-rewriter.web-resources.properties"
 edge:
-  opensearch-sink-2:
+  opensearch-sink:
     descriptor: "opensearch-sink"
     containers:
       sink:
